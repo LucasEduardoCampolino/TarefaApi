@@ -40,7 +40,7 @@ public class TarefaController {
 		return repository.save(tarefa);
 	}
 	
-	@PutMapping(value = "/id")
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Tarefa tarefa) {
 		return repository.findById(id).map(record -> {
 			record.setNome(tarefa.getNome());
@@ -51,7 +51,7 @@ public class TarefaController {
 		}).orElse(ResponseEntity.notFound().build());
 	}
 	
-	@DeleteMapping(path = {"/id"})
+	@DeleteMapping(path = {"/{id}"})
 	public ResponseEntity<?> delete(@PathVariable long id) {
 		return repository.findById(id).map(record -> {
 			repository.deleteById(id);
